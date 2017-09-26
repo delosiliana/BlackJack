@@ -7,12 +7,16 @@ class Deck
   end
 
   def self.build_deck
-    cards = []
+    @cards = []
     Card::SUITS.each do |suit|
       Card::RANKS.each do |rank|
-        cards << Card.new(rank, suit)
+        @cards << Card.new(rank, suit)
       end
     end
-    cards.shuffle
+    @cards.shuffle!
+  end
+
+  def remained
+    @cards.length
   end
 end

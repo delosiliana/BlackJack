@@ -16,9 +16,10 @@ attr_accessor :value
     return @rank if %w(2 3 4 5 6 7 8 9 10).include?(rank)
     return 10 if %w(J Q K).include?(rank)
     return 1 if rank == 'A'
+    return @value
   end
 
   def to_s
-    "#{value}"  "#{suit}"
+    "#{value}" "#{suit}"
   end
 end
