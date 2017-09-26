@@ -19,4 +19,9 @@ class Deck
   def remained
     @cards.length
   end
+
+  def reach
+    @cards.shift
+  end
+
 end
