@@ -23,5 +23,5 @@ class Deck
   def reach
     @cards.shift
   end
-
+  
 end
