@@ -8,8 +8,7 @@ attr_accessor :value
 
   def initialize(rank, suit)
     @rank = rank
-    @suit = suit
-    @value = value
+    @suit = suit    
   end
 
   def value 

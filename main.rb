@@ -9,7 +9,8 @@ Class Main
     @hand = Hand.new
     @deck = Deck.new
   end
-  
+end
+
 #loop do
 #  puts 'Введите Ваше имя:'
 #  name = gets.chomp
