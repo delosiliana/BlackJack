@@ -1,18 +1,22 @@
 class Hand
 
+  attr_accessor :hand, :value, :rank, :cards
+
   def initialize
     @hand = []
-    @deck = Deck.new
-    @cards = []
+    @cards = Deck.new
   end
 
   def deal
-    2.times { @hand << @deck.reach }
+    2.times { @hand << @cards.reach }
   end
 
   def count_values
-    @current_hand = @hand
-    @points = @current_hand.each { |card| card.value + card.value }
-    puts "#{@points}"
+    @count = 0
+    hand.each do |card|
+      @count += card.value.to_i
+      @count += 10 if @card.value == 1 && @count + 10 <= 21
+    end
+    @count
   end
 end
