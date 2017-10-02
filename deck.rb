@@ -1,5 +1,5 @@
 class Deck
-
+  
   attr_accessor :cards
 
   def initialize
@@ -22,5 +22,5 @@ class Deck
 
   def reach
     @cards.shift
-  end  
+  end
 end
