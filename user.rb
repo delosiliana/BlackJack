@@ -18,4 +18,8 @@ class User
   def zero?
     @coin.zero?
   end
+
+  def reset_cards
+    @cards.clear
+  end
 end
