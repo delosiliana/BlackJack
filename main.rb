@@ -1,22 +1,21 @@
 require_relative 'hand.rb'
+require_relative 'user.rb'
 require_relative 'deck.rb'
 require_relative 'card.rb'
 
-Class Main
-  attr_reader :deck, :hand, :card
+class Main
+  attr_accessor :cards, :deck, :hand, :user
 
   def initialize
-    @hand = Hand.new
+    puts "Введите свое имя:"
+    @name = gets.chomp.capitalize
+  end
+
+  def start_game
+    @player = User.new(@name)
+    @dealer = User.new('Dealer')
+    @bank = 0
     @deck = Deck.new
+    puts "Здраствуйте #{@name}" 
   end
 end
-
-#loop do
-#  puts 'Введите Ваше имя:'
-#  name = gets.chomp
-#  puts 'Вы не ввели имя' if name.strip.empty?
-#end
-
-hand = Hand.new
-hand.deal
-p hand.count_values

@@ -1,5 +1,4 @@
 class Hand
-
   attr_accessor :hand, :value, :rank, :cards
 
   def initialize
