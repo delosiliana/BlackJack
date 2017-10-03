@@ -16,6 +16,19 @@ class Main
     @dealer = User.new('Dealer')
     @bank = 0
     @deck = Deck.new
-    puts "Здраствуйте #{@name}" 
+    puts "Здраствуйте #{@name}"
+    menu 
+  end
+
+  def menu
+    puts "Что вы желаете сделать?:"
+    puts "1- Взять одну карту  2- Пропустить ход  3- Открыться  "
+    input = gets.to_i
+    case input
+      when 1 then 
+      when 2 then 
+      when 3 then 
+      when 0 then exit
+    end
   end
 end
