@@ -22,4 +22,8 @@ class User
   def reset_cards
     @cards.clear
   end
+  
+  def limit_cards?
+    @cards.size == 3
+  end
 end
