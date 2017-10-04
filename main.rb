@@ -8,16 +8,24 @@ class Main
 
   def initialize
     puts "Введите свое имя:"
-    @name = gets.chomp.capitalize
-  end
-
-  def start_game
-    @player = User.new(@name)
+    name = gets.chomp.capitalize
+    puts "Здраствуйте #{name}"
+    @player = User.new(name)
     @dealer = User.new('Dealer')
     @bank = 0
     @deck = Deck.new
-    puts "Здраствуйте #{@name}"
-    menu 
+    start_game
+  end
+
+  def start_game
+    while @player.coin > 0
+      @player.reset_cards
+      @dealer.reset_cards
+      @deck.shuffle_cards
+      @player.deal
+      @dealer.deal
+      puts "**&***"
+    end
   end
 
   def menu
