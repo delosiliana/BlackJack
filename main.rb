@@ -3,15 +3,16 @@ require_relative 'deck.rb'
 require_relative 'card.rb'
 
 class Main
+
   attr_accessor :cards, :deck, :hand, :user, :coin
 
   def initialize
-    puts "Введите свое имя:"
-    name = gets.chomp.capitalize    
-    @player = User.new(name)
-    @dealer = User.new('Dealer')
-    @bank = 0
     @deck = Deck.new
+    puts "Введите свое имя:"
+    @name = gets.chomp.capitalize
+    puts "Добро пожаловать в игру #{@name}."
+    @player = User.new(@name)
+    @dealer = User.new('Dealer')
     start_game
   end
 
@@ -20,9 +21,10 @@ class Main
     2.times{ add_card(@dealer) }
     @player.rate
     @dealer.rate
-    puts "Здраствуйте #{@name} у вас на руках карты #{@player.hand[0].rank}#{@player.hand[0].suit} #{@player.hand[1].rank}#{@player.hand[1].suit} у вас осталось #{@player.coin}$ сумма карт #{summa(@player)} "
+    puts "#{@name} у вас на руках карты #{@player.hand[0].rank} #{@player.hand[0].suit} #{@player.hand[1].rank}#{@player.hand[1].suit} у вас осталось#{@player.coin}$ сумма карт #{summa(@player)} "
     puts "#{see_dealer} и осталось #{@dealer.coin}$"
     menu
+    end
   end
 
   def menu
@@ -34,6 +36,25 @@ class Main
       when 2 then dealer_give
       when 3 then show_card_player
       when 0 then exit
+    end
+  end
+
+    def show_card_player
+      puts "#{@name} у вас на руках карты #{@player.hand[0].rank} #{@player.hand[0].suit} #{@player.hand[1].rank} #{@player.hand[1].suit} сумма #{summa(@player)}"
+      puts "У диллера на руках карты #{@dealer.hand[0].rank} #{@dealer.hand[0].suit} #{@player.hand[1].rank}#{@dealer.hand[1].suit} сумма #{summa(@dealer)}"
+      if summa(@dealer) > summa(@player) && summa(@dealer) < 21
+        @dealer.winnings
+        puts "Ты проиграл, Выйграл диллер. У диллера #{@dealer.coin}$, у тебя #{@player.coin}$"
+        new_game
+      elsif  summa(@player) > summa(@dealer) && summa(@player) < 21
+        puts "Ты выиграл, у диллера #{summa(@dealer)}очков"
+        @player.winnings
+        new_game
+      else 
+        @player.winn
+        @dealer.winn
+        puts "Ничья. Деньги возвращены обратно"
+      new_game
     end
   end
 
