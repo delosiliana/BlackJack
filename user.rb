@@ -12,7 +12,7 @@ class User
   def deal
     @hand << @cards.reach
   end
-  
+
   def rate
     @coin -= 10
   end
@@ -34,13 +34,9 @@ class User
   end
 
   def reset_cards
-    @cards.clear
+    @hand.clear
   end
 
-  def limit_cards?
-    @cards.size == 3
-  end
-  
   def count_values
     @count = 0
     @hand.each do |card|
