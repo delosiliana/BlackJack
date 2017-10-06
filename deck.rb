@@ -1,6 +1,6 @@
 class Deck
   
-  attr_accessor :cards
+  attr_accessor :cards, :deck
 
   def initialize
     @cards = Deck.build_deck
@@ -22,5 +22,9 @@ class Deck
 
   def reach
     @cards.shift
+  end
+
+  def shuffle_cards
+    @cards.shuffle!
   end
 end
