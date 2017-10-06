@@ -1,5 +1,4 @@
 class Deck
-  
   attr_accessor :cards, :deck
 
   def initialize

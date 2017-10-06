@@ -1,5 +1,4 @@
 class User
-
   attr_accessor :hand, :cards, :coin
 
   def initialize(name)
@@ -30,11 +29,11 @@ class User
   end
 
   def show_card
-    @hand.each { |card| print "#{card.to_s} " }
+    @hand.each { |card| print "#{card} " }
   end
 
   def show_dealer
-    @hand.size { |card| print '*  ' }
+    @hand.size { |_card| print '*  ' }
   end
 
   def reset_cards
