@@ -1,14 +1,13 @@
 class Card
 
-  attr_reader :rank, :suit
-  attr_accessor :value
-
+  attr_reader :rank, :suit, :value
+  
   RANKS= ['2', '3', '4', '5', '6', '7', '8', '9', '10','J', 'Q', 'K', 'A'].freeze
-  SUITS = ['♠', '♣' ,'♦' ,'♥'].freeze
+  SUITS = ['♠', '♣','♦','♥'].freeze
 
   def initialize(rank, suit)
     @rank = rank
-    @suit = suit    
+    @suit = suit
   end
 
   def value 
@@ -19,6 +18,6 @@ class Card
   end
 
   def to_s
-    "#{value}" "#{suit}"
+    "#{rank}" "#{suit}"
   end
 end
