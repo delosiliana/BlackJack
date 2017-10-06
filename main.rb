@@ -78,9 +78,12 @@ class Main
     add_card(@player)
     puts "Вы взяли карту #{@player.hand[2].rank}#{@player.hand[2].suit}, сумма карт стала #{summa(@player)} "
     dealer_give
-    if summa(@player)<=21 &&  summa(@player) > summa(@dealer) 
-      puts "Ты победил"
+    if summa(@player) <=21 &&  summa(@player) > summa(@dealer) 
+      puts "У диллера #{summa(@dealer)} очков"
+      @player.winnings
+      puts "Ты победил.Сумма твоих карт #{summa(@player)} У тебя #{@player.coin}$"
     end
+    new_game
   end
 
   def dealer_give
