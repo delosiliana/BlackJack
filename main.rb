@@ -54,4 +54,12 @@ class Main
     "У дилера #{@dealer.show_dealer} карты"
   end
 
+  def player_give
+    add_card(@player)
+    puts "Вы взяли карту #{@player.hand[2].rank}#{@player.hand[2].suit}, сумма карт стала #{summa(@player)} "
+    dealer_give
+    if summa(@player)<=21 &&  summa(@player) > summa(@dealer) 
+      puts "Ты победил"
+    end
+  end
 end
