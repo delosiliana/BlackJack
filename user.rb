@@ -21,6 +21,10 @@ class User
     @coin += 20
   end
 
+  def winn
+    @coin += 10
+  end
+
   def zero?
     @coin.zero?
   end

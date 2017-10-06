@@ -8,9 +8,9 @@ class Main
 
   def initialize
     @deck = Deck.new
-    puts "Введите свое имя:"
+    puts "Введите свое имя:  "
     @name = gets.chomp.capitalize
-    puts "Добро пожаловать в игру #{@name}."
+    puts "Добро пожаловать в игру #{@name}. "
     @player = User.new(@name)
     @dealer = User.new('Dealer')
     start_game
@@ -38,14 +38,14 @@ class Main
       when 0 then exit
     end
   end
-
-    def show_card_player
-      puts "#{@name} у вас на руках карты #{@player.hand[0].rank} #{@player.hand[0].suit} #{@player.hand[1].rank} #{@player.hand[1].suit} сумма #{summa(@player)}"
-      puts "У диллера на руках карты #{@dealer.hand[0].rank} #{@dealer.hand[0].suit} #{@player.hand[1].rank}#{@dealer.hand[1].suit} сумма #{summa(@dealer)}"
-      if summa(@dealer) > summa(@player) && summa(@dealer) < 21
-        @dealer.winnings
-        puts "Ты проиграл, Выйграл диллер. У диллера #{@dealer.coin}$, у тебя #{@player.coin}$"
-        new_game
+  
+  def show_card_player
+   puts "#{@name} у вас на руках карты #{@player.hand[0].rank} #{@player.hand[0].suit} #{@player.hand[1].rank} #{@player.hand[1].suit} сумма #{summa(@player)}"
+   puts "У диллера на руках карты #{@dealer.hand[0].rank} #{@dealer.hand[0].suit} #{@player.hand[1].rank}#{@dealer.hand[1].suit} сумма #{summa(@dealer)}"
+   if summa(@dealer) > summa(@player) && summa(@dealer) < 21
+    @dealer.winnings
+     puts "Ты проиграл, Выйграл диллер. У диллера #{@dealer.coin}$, у тебя #{@player.coin}$"
+      new_game
       elsif  summa(@player) > summa(@dealer) && summa(@player) < 21
         puts "Ты выиграл, у диллера #{summa(@dealer)}очков"
         @player.winnings
@@ -57,7 +57,7 @@ class Main
       new_game
     end
   end
-
+  
   def summa(user)
     user.count_values
   end
@@ -79,37 +79,59 @@ class Main
     puts "Вы взяли карту #{@player.hand[2].rank}#{@player.hand[2].suit}, сумма карт стала #{summa(@player)} "
     dealer_give
     if summa(@player) <=21 &&  summa(@player) > summa(@dealer) 
-      puts "У диллера #{summa(@dealer)} очков"
-      @player.winnings
-      puts "Ты победил.Сумма твоих карт #{summa(@player)} У тебя #{@player.coin}$"
+    puts "У диллера #{summa(@dealer)} очков"
+    @player.winnings
+    puts "Ты победил.Сумма твоих карт #{summa(@player)} У тебя #{@player.coin}$"
     end
     new_game
   end
-
+  
   def dealer_give
     while summa(@dealer) <= 17
-      add_card(@dealer)
-      puts "Дилер взял карту #{@dealer.hand[2].rank}#{@dealer.hand[2].suit} "
-      puts "У диллера #{@dealer.hand[0].rank}#{@dealer.hand[0].suit} #{@dealer.hand[1].rank}#{@dealer.hand[1].suit} #{@dealer.hand[2].rank}#{@dealer.hand[2].suit}сумма карт #{summa(@dealer)}"
+    add_card(@dealer)
+    puts "Дилер взял карту #{@dealer.hand[2].rank}#{@dealer.hand[2].suit} "
+    puts "У диллера #{@dealer.hand[0].rank}#{@dealer.hand[0].suit} #{@dealer.hand[1].rank}#{@dealer.hand[1].suit} #{@dealer.hand[2].rank}#{@dealer.hand[2].suit}сумма карт #{summa(@dealer)}"
     if summa(@dealer) > summa(@player) && summa(@dealer) < 21
-      @dealer.winnings
-      puts "Ты проиграл, Выйграл диллер. У диллера #{@dealer.coin}$, у тебя #{@player.coin}$"
+    @dealer.winnings
+     puts "Ты проиграл, Выйграл диллер. У диллера #{@dealer.coin}$, у тебя #{@player.coin}$"
       new_game
-    else @player.winnings 
-      puts "Ты выиграл, у диллера #{summa(@dealer)}очков"
+      else @player.winnings 
+        puts "Ты выиграл, у диллера #{summa(@dealer)}очков"
       new_game
-    end
+    end    
     if summa(@dealer) == 21
       puts "У диллера #{@dealer.hand[0].rank}#{@dealer.hand[0].suit} #{@dealer.hand[1].rank}#{@dealer.hand[1].suit}"
       @dealer.winnings
       puts "Диллер выйграл сумма карт #{summa(@dealer)} У диллера #{@dealer.coin}$ у тебя #{@player.coin}$"
       new_game
-    end
     elsif summa(@dealer) > 21
       puts "У диллера #{@dealer.hand[0].rank}#{@dealer.hand[0].suit} #{@dealer.hand[1].rank}#{@dealer.hand[1].suit}"
       @player.winnings
       puts "У диллера больше 21, ты победил. У тебя #{@player.coin}$"
       new_game
-    end    
+    end
   end
+  end
+  
+  def new_game
+    puts "Вы желаете сыграть еще раз?"
+    puts "1- да  2- нет "
+    input = gets.to_i
+    case input
+      when 1 then 
+        until @player.zero? && @dealer.zero?
+        @player.reset_cards
+        @dealer.reset_cards
+        start_game
+          if @player.zero? 
+          exit puts "У вас не хватает денег для игры, диллер выиграл все деньги"
+          elsif @dealer.zero? 
+          exit puts "У Диллера нехватает денег для игры, вы выиграли все деньги."
+          end
+        end
+      when 2 then 
+        puts "Спасибо за игру"
+        abort
+      
+    end
 end
