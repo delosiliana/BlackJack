@@ -62,4 +62,21 @@ class Main
       puts "Ты победил"
     end
   end
+
+  def dealer_give
+    while summa(@dealer) < 17
+    add_card(@dealer) 
+    puts "У диллера #{@dealer.hand[0].rank}#{@dealer.hand[0].suit} #{@dealer.hand[1].rank}#{@dealer.hand[1].suit} #{@dealer.hand[2].rank}#{@dealer.hand[2].suit} сумма карт #{summa(@dealer)}"
+    end 
+    if summa(@dealer) == 21
+      puts "У диллера 21"
+      puts "У диллера #{@dealer.hand[0].rank}#{@dealer.hand[0].suit} #{@dealer.hand[1].rank}#{@dealer.hand[1].suit}"
+      start_game
+    elsif summa(@dealer) > 21
+      puts "У диллера #{@dealer.hand[0].rank}#{@dealer.hand[0].suit} #{@dealer.hand[1].rank}#{@dealer.hand[1].suit}"
+      puts "У диллера больше 21, ты победил"
+      #@user.win
+      start_game
+    end
+  end
 end
