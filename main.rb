@@ -87,19 +87,29 @@ class Main
   end
 
   def dealer_give
-    while summa(@dealer) < 17
-    add_card(@dealer) 
-    puts "У диллера #{@dealer.hand[0].rank}#{@dealer.hand[0].suit} #{@dealer.hand[1].rank}#{@dealer.hand[1].suit} #{@dealer.hand[2].rank}#{@dealer.hand[2].suit} сумма карт #{summa(@dealer)}"
-    end 
+    while summa(@dealer) <= 17
+      add_card(@dealer)
+      puts "Дилер взял карту #{@dealer.hand[2].rank}#{@dealer.hand[2].suit} "
+      puts "У диллера #{@dealer.hand[0].rank}#{@dealer.hand[0].suit} #{@dealer.hand[1].rank}#{@dealer.hand[1].suit} #{@dealer.hand[2].rank}#{@dealer.hand[2].suit}сумма карт #{summa(@dealer)}"
+    if summa(@dealer) > summa(@player) && summa(@dealer) < 21
+      @dealer.winnings
+      puts "Ты проиграл, Выйграл диллер. У диллера #{@dealer.coin}$, у тебя #{@player.coin}$"
+      new_game
+    else @player.winnings 
+      puts "Ты выиграл, у диллера #{summa(@dealer)}очков"
+      new_game
+    end
     if summa(@dealer) == 21
-      puts "У диллера 21"
       puts "У диллера #{@dealer.hand[0].rank}#{@dealer.hand[0].suit} #{@dealer.hand[1].rank}#{@dealer.hand[1].suit}"
-      start_game
+      @dealer.winnings
+      puts "Диллер выйграл сумма карт #{summa(@dealer)} У диллера #{@dealer.coin}$ у тебя #{@player.coin}$"
+      new_game
+    end
     elsif summa(@dealer) > 21
       puts "У диллера #{@dealer.hand[0].rank}#{@dealer.hand[0].suit} #{@dealer.hand[1].rank}#{@dealer.hand[1].suit}"
-      puts "У диллера больше 21, ты победил"
-      #@user.win
-      start_game
-    end
+      @player.winnings
+      puts "У диллера больше 21, ты победил. У тебя #{@player.coin}$"
+      new_game
+    end    
   end
 end
