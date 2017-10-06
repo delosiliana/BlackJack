@@ -37,4 +37,21 @@ class Main
       when 0 then exit
     end
   end
+
+  def summa(user)
+    user.count_values
+  end
+
+  def add_card(user)
+    user.deal
+  end
+
+  def see_card
+    @player.show_card
+  end
+
+  def see_dealer
+    "У дилера #{@dealer.show_dealer} карты"
+  end
+
 end
