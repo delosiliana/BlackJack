@@ -6,6 +6,8 @@
 sandbox.rb
 /.idea/*
 
+.idea
+
 *.gem
 *.rbc
 /.config
